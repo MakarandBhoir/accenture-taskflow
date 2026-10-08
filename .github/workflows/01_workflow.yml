@@ -1,0 +1,10 @@
+name: First Workflow
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  JobA:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Welcome To Github Action!
