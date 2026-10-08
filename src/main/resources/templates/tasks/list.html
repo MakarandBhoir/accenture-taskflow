@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Tasks')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main class="container">
+    <h1>My tasks</h1>
+    <p class="summary">
+        <span th:text="${done}">0</span> of <span th:text="${total}">0</span> completed
+    </p>
+
+    <p th:if="${#lists.isEmpty(tasks)}" class="empty">No tasks yet. Add one to get started.</p>
+
+    <ul class="task-list">
+        <li th:each="t : ${tasks}" th:classappend="${t.completed} ? 'done'">
+            <div class="task-info">
+                <strong th:text="${t.title}">Title</strong>
+                <span class="badge" th:classappend="${'p-' + #strings.toLowerCase(t.priority)}"
+                      th:text="${t.priority}">MEDIUM</span>
+                <p th:if="${t.description}" th:text="${t.description}">Description</p>
+            </div>
+            <div class="task-actions">
+                <form th:action="@{/tasks/{id}/toggle(id=${t.id})}" method="post">
+                    <button type="submit" class="btn small"
+                            th:text="${t.completed} ? 'Reopen' : 'Complete'">Complete</button>
+                </form>
+                <form th:action="@{/tasks/{id}/delete(id=${t.id})}" method="post">
+                    <button type="submit" class="btn small danger">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</main>
+</body>
+</html>

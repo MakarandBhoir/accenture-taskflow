@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('New task')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main class="container">
+    <h1>New task</h1>
+
+    <form th:action="@{/tasks}" th:object="${task}" method="post" class="card">
+        <label for="title">Title</label>
+        <input id="title" type="text" th:field="*{title}">
+        <p class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</p>
+
+        <label for="description">Description</label>
+        <textarea id="description" rows="3" th:field="*{description}"></textarea>
+        <p class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>
+
+        <label for="priority">Priority</label>
+        <select id="priority" th:field="*{priority}">
+            <option th:each="p : ${priorities}" th:value="${p}" th:text="${p}">MEDIUM</option>
+        </select>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Save</button>
+            <a th:href="@{/}" class="btn secondary">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>
