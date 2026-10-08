@@ -1,0 +1,16 @@
+name: Second Workflow
+# on:
+#     push:
+#         branches: [main]
+#         paths: ["src/**"]
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    JobA:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Greeting message
+              run: echo "Welcome Again to Github Action !"
