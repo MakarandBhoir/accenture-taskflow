@@ -1,0 +1,23 @@
+trigger:
+- main
+
+stages:
+  - stage: 
+    displayName: Build
+
+    jobs:
+      - job: MavenProjectBuild
+        pool:
+          vmImage: ubuntu-latest
+          
+        steps:
+        - task: Maven@4
+          inputs:
+            mavenPomFile: 'pom.xml'
+            publishJUnitResults: false
+            javaHomeOption: 'JDKVersion'
+            jdkVersionOption: '1.21'
+            mavenVersionOption: 'Default'
+            mavenAuthenticateFeed: false
+            effectivePomSkip: false
+            sonarQubeRunAnalysis: false
