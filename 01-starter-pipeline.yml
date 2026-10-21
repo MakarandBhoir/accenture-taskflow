@@ -1,8 +1,13 @@
 trigger:
-- main
+- none
+
+# pool:
+#   vmImage: ubuntu-latest
 
 pool:
-  vmImage: ubuntu-latest
+  name: accenture-pool
+  demands:
+    - Agent.name -equals agent1
 
 steps:
 - script: echo Learning Azure Pipeline !!!
