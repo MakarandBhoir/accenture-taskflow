@@ -24,7 +24,7 @@ stages:
             
         - task: CopyFiles@2
           inputs:
-            SourceFolder: '$(System.DefaultSourceDirectory)'
+            SourceFolder: '$(Build.SourcesDirectory)'
             Contents: '**/target/taskflow.jar'
             TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
