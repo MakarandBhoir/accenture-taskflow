@@ -1,0 +1,20 @@
+trigger:
+- none
+
+stages:
+  - stage: 
+    displayName: Build
+    jobs:
+      - job: jobA
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - bash: echo "Job A is executing !!!"
+
+      - job: jobB
+        dependsOn: jobA 
+        pool:
+          vmImage: windows-latest
+        steps:
+          - bash: echo "Job B is executing !!!"
+

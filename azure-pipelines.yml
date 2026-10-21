@@ -1,0 +1,36 @@
+trigger:
+- main
+
+stages:
+  - stage: 
+    displayName: Build
+
+    jobs:
+      - job: MavenProjectBuild
+        pool:
+          # vmImage: ubuntu-latest
+          name: accenture-pool
+          
+        steps:
+        - task: Maven@4
+          inputs:
+            mavenPomFile: 'pom.xml'
+            publishJUnitResults: false
+            javaHomeOption: 'JDKVersion'
+            jdkVersionOption: '1.21'
+            mavenVersionOption: 'Default'
+            mavenAuthenticateFeed: false
+            effectivePomSkip: false
+            sonarQubeRunAnalysis: 
+            
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(Build.SourcesDirectory)'
+            Contents: '**/target/taskflow.jar'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
