@@ -12,6 +12,7 @@ stages:
           - bash: echo "Job A is executing !!!"
 
       - job: jobB
+        dependsOn: jobA 
         pool:
           vmImage: windows-latest
         steps:
