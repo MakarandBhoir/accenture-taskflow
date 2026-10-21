@@ -20,4 +20,16 @@ stages:
             mavenVersionOption: 'Default'
             mavenAuthenticateFeed: false
             effectivePomSkip: false
-            sonarQubeRunAnalysis: false
+            sonarQubeRunAnalysis: 
+            
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(System.DefaultSourceDirectory)'
+            Contents: '**/target/taskflow.jar'
+            TargetFolder: '$(Build.ArtifactsStagingDirectory)'
+
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
