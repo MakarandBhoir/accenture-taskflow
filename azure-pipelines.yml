@@ -8,8 +8,8 @@ stages:
     jobs:
       - job: MavenProjectBuild
         pool:
-          # vmImage: ubuntu-latest
-          name: accenture-pool
+          vmImage: ubuntu-latest
+          # name: accenture-pool
           
         steps:
         - task: Maven@4
