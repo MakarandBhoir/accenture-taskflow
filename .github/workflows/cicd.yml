@@ -45,6 +45,6 @@ jobs:
       - name: Azure Web App Deploy Artifact
         uses: azure/webapps-deploy@v2
         with:
-          app-name: taskflow1
+          app-name: "taskflow1"
           package: ./taskflow.jar
 
